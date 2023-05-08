@@ -1,0 +1,34 @@
+Code Documentation
+
+This code is a Discord bot written in Python using the discord.py library. The bot is designed to create and set up channels for different types of servers, such as standard servers, art servers, music servers, school servers, and furry servers. It also provides icebreaker questions for each server type.
+
+The bot uses the discord.py library, which is a powerful API wrapper for Discord written in Python. It makes use of the commands module from discord.ext to create commands for the bot.
+
+Here is an overview of the different components and functionality of the code:
+
+Importing Dependencies:
+
+random: Used for selecting random icebreaker questions.
+discord and commands from discord.ext: Required for creating the Discord bot and defining commands.
+Discord Bot Setup:
+
+The code initializes a discord.Intents object with default intents and sets specific intents for members, presences, guilds, messages, and message content.
+The SERVER_TYPE variable is initialized as an empty string.
+Icebreaker Questions:
+
+The code defines four lists of icebreaker questions for different server types: icebreaker_questions_SCHOOL, icebreaker_questions_FURRY, icebreaker_questions_MUSIC, and icebreaker_questions_ART. Each list contains a set of questions related to the respective server type.
+Admins and Channel Names:
+
+The ADMINS list contains the usernames of the users who have authority to run certain server setup commands.
+The Channel_Names_Standard, Channel_Names_Art, Channel_Names_Music, Channel_Names_School, and Channel_Names_Furry variables define the names of channels to be created for each server type.
+Discord Bot Initialization and Events:
+
+The commands.Bot class is used to create an instance of the bot, specifying the command prefix ("/") and the intents.
+The on_ready event is defined to print a message when the bot is connected and ready to use.
+Creating Channels:
+
+The create_channel command is defined to create a new text channel with the specified name.
+The create_channel command can be used by an admin to create channels for different server types: standard, art, music, school, and furry.
+The create_channel command checks if the user running the command is an admin (username present in the ADMINS list) before creating channels.
+For each server type, the command creates channels based on the predefined channel names. It sends a welcome message and mentions all the members in the channel. It also sends a random icebreaker question related to the server type.
+Please note that this code is provided as-is and under the MIT license. The creator, Brytan M Kelly, assumes no responsibility for any issues or damages that may arise from using this code. For more information about the creator and the bot, you can visit brytankelly.com.
