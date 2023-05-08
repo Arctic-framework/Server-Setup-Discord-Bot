@@ -1,0 +1,403 @@
+#CREATED BY BRYTAN M KELLY MAY 7 2023, under an MIT license, please note that this code si to be used at you own risk, For more info on its creator and the bot itself go to #brytankelly.com
+
+import random
+
+import discord
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
+intents.guilds = True
+intents.messages = True
+intents.message_content = True
+SERVER_TYPE = ''
+
+
+
+
+
+## THESE RIGHT HERE ARE THE ICE BREAKERS
+
+#SCHOOL
+
+icebreaker_questions_SCHOOL = [
+    "What's your favorite subject in school?",
+    "What extracurricular activities are you involved in?",
+    "Do you have any hobbies or interests outside of school?",
+    "What is your favorite book or movie related to school?",
+    "What is the most memorable field trip you've been on?",
+    "If you could travel anywhere for an educational trip, where would you go?",
+    "What is your favorite school lunch?",
+    "What is the most interesting thing you've learned recently?",
+    "What is your go-to study technique or strategy?",
+    "Do you prefer group projects or individual assignments?",
+    "What is the best piece of advice you've received about school?",
+    "What is your favorite memory from a school event?",
+    "If you could change one thing about your school, what would it be?",
+    "Who is your favorite teacher and why?",
+    "What is your dream career or future educational goal?",
+    "What is your favorite school-related app or online tool?",
+    "What is the most challenging subject for you?",
+    "What study tips would you give to others?",
+    "What is your favorite school tradition?",
+    "What is the most interesting fact you've learned in a class?"
+]
+
+#FURRY
+
+icebreaker_questions_FURRY = [
+    "What's your favorite furry species?",
+    "Do you have a fursona? Tell us about them!",
+    "What inspired you to become a furry?",
+    "How long have you been a part of the furry fandom?",
+    "What are some of your favorite furry artists or creators?",
+    "Have you ever attended a furry convention? If so, which one and what was your experience like?",
+    "What's your favorite furry-themed movie or TV show?",
+    "Do you enjoy creating furry artwork or stories? Tell us about your creations!",
+    "What is your favorite aspect of the furry community?",
+    "Do you have any furry-themed costumes or fursuits? Share some pictures if you have them!",
+    "What is the most memorable furry-related event you've participated in?",
+    "If you could have any animal as a pet, which one would you choose and why?",
+    "What is your favorite furry-related website or online community?",
+    "Do you have a favorite furry character from literature, comics, or games?",
+    "What is your favorite aspect of anthropomorphic animal characters?",
+    "Have you ever commissioned or purchased furry artwork? Show us some of your favorites!",
+    "Do you enjoy roleplaying as furry characters? Tell us about your experiences!",
+    "What are some misconceptions about furries that you'd like to address?",
+    "If you could transform into any furry species for a day, which one would you choose?",
+    "What is your favorite furry-themed song or music genre?",
+    "What does being a furry mean to you personally?"
+]
+
+#MUSIC
+
+icebreaker_questions_MUSIC = [
+    "What's your favorite genre of music and why?",
+    "Who is your all-time favorite musician or band?",
+    "Do you play any musical instruments? If so, which ones?",
+    "What was the first concert you ever attended? Share your experience!",
+    "Are there any music festivals or events you would love to attend?",
+    "Do you prefer listening to music alone or with friends?",
+    "What is your go-to song or album when you need a mood boost?",
+    "Have you ever tried creating your own music? Tell us about your experiences!",
+    "Who are some emerging artists or bands that you're currently enjoying?",
+    "What's the most memorable live performance you've ever seen?",
+    "Do you have a favorite music video? Share the link or describe it!",
+    "What are some underrated or underappreciated songs that you love?",
+    "Is there a particular song or album that holds sentimental value for you? What's the story behind it?",
+    "What's your favorite soundtrack from a movie, TV show, or video game?",
+    "Do you have a guilty pleasure song or artist that you secretly enjoy?",
+    "Have you ever participated in a karaoke night or open mic event? How did it go?",
+    "Do you listen to music while studying or working? If so, what kind of music helps you focus?",
+    "What's your opinion on music streaming platforms? Do you have a favorite one?",
+    "If you could attend any concert or music event in history, which one would you choose?",
+    "What's the most unique or uncommon instrument you've encountered or played?",
+    "Have you ever been in a band or musical group? Share your band experiences!",
+    "What is the most memorable music-related gift you've received or given?",
+    "If you could collaborate with any musician, living or deceased, who would you choose and why?",
+    "What's a song that always gets you on the dance floor?",
+    "Do you have a favorite music-related quote or lyric that resonates with you?"
+]
+
+#ART
+
+icebreaker_questions_ART = [
+    "What is your favorite art medium to work with and why?",
+    "Who is your favorite artist, either contemporary or historical?",
+    "Do you have a preferred art style or technique? Tell us about it!",
+    "What inspired you to start creating art?",
+    "What is your favorite subject matter to depict in your art?",
+    "Do you have a favorite art museum or gallery? Share your experiences!",
+    "Have you ever participated in an art exhibition or showcase? How did it go?",
+    "What's your most memorable art project or commission you've worked on?",
+    "Is there a specific artwork that has deeply influenced or impacted you? Describe it!",
+    "Do you enjoy creating art digitally or traditionally? Or both?",
+    "What's your process or approach when starting a new art piece?",
+    "Have you ever experimented with unconventional or mixed media in your art?",
+    "Do you have any favorite art books, tutorials, or online resources you'd recommend?",
+    "What's the biggest challenge you've faced as an artist, and how did you overcome it?",
+    "Are there any art techniques or skills you're currently working on improving?",
+    "What's your opinion on art critiques and feedback? Do you actively seek them?",
+    "Do you enjoy collaborating with other artists? Share your collaborative art experiences!",
+    "What's your favorite art tool or supply that you can't live without?",
+    "Are there any art movements or periods that you particularly resonate with?",
+    "Do you prefer creating art for personal expression or for a specific purpose?",
+    "Have you ever sold your artwork or taken commissions? How was the experience?",
+    "What's your favorite color palette or color combination to work with?",
+    "Do you have any rituals or habits that help you get into the creative mindset?",
+    "What's the most unique or unconventional material you've used in your art?",
+    "If you could have a private lesson with any artist, living or deceased, who would you choose?",
+    "What advice would you give to aspiring artists who are just starting their artistic journey?"
+]
+
+
+#STANDARD
+
+icebreaker_questions_STANDARD = [
+    "What's your favorite hobby or pastime outside of Discord?",
+    "If you could travel anywhere in the world, where would you go and why?",
+    "What's the most interesting book you've read recently?",
+    "What's your go-to comfort food or favorite cuisine?",
+    "If you could have any superpower, what would it be and how would you use it?",
+    "What's your favorite movie or TV show of all time?",
+    "If you were stranded on a deserted island, what three things would you bring?",
+    "What's your favorite season and why?",
+    "If you could meet any historical figure, who would it be and what would you ask them?",
+    "What's the most memorable concert or live performance you've attended?",
+    "If you could learn a new skill instantly, what would it be?",
+    "What's your favorite way to unwind and relax after a long day?",
+    "If you could have dinner with any fictional character, who would you choose?",
+    "What's the best piece of advice you've ever received?",
+    "If you could witness any event in history, what would it be and why?",
+    "What's your favorite app or website (besides Discord) that you can't live without?",
+    "If you could learn any language overnight, which one would you choose?",
+    "What's your favorite board game or video game to play with friends?",
+    "If you could have any animal as a pet, what would it be and why?",
+    "What's your favorite quote or motto that you live by?",
+    "If you could have a conversation with any celebrity, who would it be and what would you talk about?",
+    "What's your hidden talent or something most people don't know about you?",
+    "If you could time travel, would you go to the past or the future? Why?",
+    "What's your favorite way to spend a lazy Sunday?",
+    "If you could be any fictional character for a day, who would you choose and what would you do?",
+    "What's the most memorable gift you've ever received?",
+    "If you could have a free ticket to any event, what would you choose to attend?"
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Usethis to give yourself or others the creds to run server setup commands
+ADMINS = ['Alert("Hi_There")']
+
+# SERVER_S
+Channel_Names_Standard = {'welcome', 'help', 'bot commands', 'art', 'music', 'memes', 'help', 'suggestions', 'general', 'other'}
+# SERVER_A
+Channel_Names_Art = {'welcome', 'help', 'bot commands', 'art', 'music', 'memes', 'help', 'suggestions', 'general', '3D art', '2D art', 'Digital art', 'Art discussions', 'Art history', 'other'}
+#SERVER_M
+Channel_Names_Music = {'welcome', 'help', 'bot commands', 'music', 'memes', 'help', 'suggestions', 'general', 'Guitar', 'Piano', 'Drums', 'Musicians', 'Composers', 'Singers', 'other'}
+#SERVER_SC
+Channel_Names_School = {'welcome', 'help', 'bot commands', 'art', 'music', 'memes', 'help', 'suggestions', 'general', 'Math', 'Reading', 'Writing', 'Tutoring', 'Electives', 'other'}
+#SERVER_F
+Channel_Names_Furry = {'welcome', 'help', 'bot commands', 'art', 'music', 'memes', 'help', 'suggestions', 'general', 'OCs', 'Cats', 'Foxes', 'Dogs', 'avalis', 'non-furry chat', 'media', 'other'}
+
+
+bot = commands.Bot(command_prefix='/', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'Bot is connected as {bot.user.name}')
+
+@bot.command(name='chan')
+async def create_channel(ctx, channel_name):
+    guild = ctx.guild  # Get the server (guild) object
+    category = ctx.channel.category  # Get the category of the current channel (optional)
+
+    # Create the channel
+    new_channel = await guild.create_text_channel(channel_name, category=category)
+
+    # Send a confirmation message
+    await ctx.send(f'Channel {new_channel.name} has been created.')
+
+
+
+@bot.command(name='server_S') #Standard server
+async def create_channel(ctx):
+    print(ctx.author.name)
+    if ctx.author.name in ADMINS:
+        guild = ctx.guild  # Get the server (guild) object
+        category = ctx.channel.category  # Get the category of the current channel (optional)
+
+        for Channels in Channel_Names_Standard:
+            # Create the channel
+            new_channel = await guild.create_text_channel(Channels, category=category)
+
+            await new_channel.send(f":sparkles: Welcome to the {new_channel} channel, enjoy your stay! :sparkles: ")
+            # Send a confirmation message
+            await ctx.send(f'Channel {new_channel.name} has been created.')
+
+            guild = ctx.guild  # Get the server (guild) object
+
+            user_names = [member.name for member in guild.members]
+
+            # Send the list of user names as a message
+            await new_channel.send(f"`{', @'.join(user_names)}`")
+            await new_channel.send(f"{random.choice(icebreaker_questions_STANDARD)}")
+
+    else:
+        await ctx.send('You dont have the authority to run this command')
+    global SERVER_TYPE
+    SERVER_TYPE = 'STANDARD'
+
+
+
+@bot.command(name='server_A') # Art server
+async def create_channel(ctx):
+    print(ctx.author.name)
+    if ctx.author.name in ADMINS:
+        guild = ctx.guild  # Get the server (guild) object
+        category = ctx.channel.category  # Get the category of the current channel (optional)
+
+        for Channels in Channel_Names_Art:
+            # Create the channel
+            new_channel = await guild.create_text_channel(Channels, category=category)
+
+            await new_channel.send(f":sparkles: Welcome to the {new_channel} channel, enjoy your stay! :sparkles: ")
+            # Send a confirmation message
+            await ctx.send(f'Channel {new_channel.name} has been created.')
+
+            guild = ctx.guild  # Get the server (guild) object
+
+            user_names = [member.name for member in guild.members]
+
+            # Send the list of user names as a message
+            await new_channel.send(f"`{', @'.join(user_names)}`")
+            await new_channel.send(f"{random.choice(icebreaker_questions_ART)}")
+
+    else:
+        await ctx.send('You dont have the authority to run this command')
+    global SERVER_TYPE
+    SERVER_TYPE = 'ART'
+
+
+
+@bot.command(name='server_M') #Music server
+async def create_channel(ctx):
+    print(ctx.author.name)
+    if ctx.author.name in ADMINS:
+        guild = ctx.guild  # Get the server (guild) object
+        category = ctx.channel.category  # Get the category of the current channel (optional)
+
+        for Channels in Channel_Names_Music:
+            # Create the channel
+            new_channel = await guild.create_text_channel(Channels, category=category)
+
+            await new_channel.send(f":sparkles: Welcome to the {new_channel} channel, enjoy your stay! :sparkles: ")
+            # Send a confirmation message
+            await ctx.send(f'Channel {new_channel.name} has been created.')
+
+            guild = ctx.guild  # Get the server (guild) object
+
+            user_names = [member.name for member in guild.members]
+
+            # Send the list of user names as a message
+            await new_channel.send(f"`{', @'.join(user_names)}`")
+            await new_channel.send(f"{random.choice(icebreaker_questions_MUSIC)}")
+
+    else:
+        await ctx.send('You dont have the authority to run this command')
+    global SERVER_TYPE
+    SERVER_TYPE = 'MUSIC'
+
+
+
+@bot.command(name='server_SC') #School server
+async def create_channel(ctx):
+    print(ctx.author.name)
+    if ctx.author.name in ADMINS:
+        guild = ctx.guild  # Get the server (guild) object
+        category = ctx.channel.category  # Get the category of the current channel (optional)
+
+        for Channels in Channel_Names_School:
+            # Create the channel
+            new_channel = await guild.create_text_channel(Channels, category=category)
+
+            await new_channel.send(f":sparkles: Welcome to the {new_channel} channel, enjoy your stay! :sparkles: ")
+            # Send a confirmation message
+            await ctx.send(f'Channel {new_channel.name} has been created.')
+
+            guild = ctx.guild  # Get the server (guild) object
+
+            user_names = [member.name for member in guild.members]
+
+            # Send the list of user names as a message
+            await new_channel.send(f"`{', @'.join(user_names)}`")
+            await new_channel.send(f"{random.choice(icebreaker_questions_SCHOOL)}")
+
+    else:
+        await ctx.send('You dont have the authority to run this command')
+    global SERVER_TYPE
+    SERVER_TYPE = 'SCHOOL'
+
+
+
+@bot.command(name='server_F') #Furry server
+async def create_channel(ctx):
+    print(ctx.author.name)
+    if ctx.author.name in ADMINS:
+        guild = ctx.guild  # Get the server (guild) object
+        category = ctx.channel.category  # Get the category of the current channel (optional)
+
+        for Channels in Channel_Names_Furry:
+            # Create the channel
+            new_channel = await guild.create_text_channel(Channels, category=category)
+
+            await new_channel.send(f":sparkles: Welcome to the {new_channel} channel, enjoy your stay! :sparkles: ")
+            # Send a confirmation message
+            await ctx.send(f'Channel {new_channel.name} has been created.')
+
+            guild = ctx.guild  # Get the server (guild) object
+
+            user_names = [member.name for member in guild.members]
+
+            # Send the list of user names as a message
+            await new_channel.send(f"`{', @'.join(user_names)}`")
+            await new_channel.send(f"{random.choice(icebreaker_questions_FURRY)}")
+
+    else:
+        await ctx.send('You dont have the authority to run this command')
+    global SERVER_TYPE
+    SERVER_TYPE = 'FURRY'
+
+
+@bot.command(name='whoami') #Find out what kind of server this is
+async def create_channel(ctx):
+    global SERVER_TYPE
+    print(SERVER_TYPE)
+    try:
+        await ctx.send(f'This server is a, {SERVER_TYPE} server')
+    except:
+        await ctx.send('This server has not decided on a type yet:(')
+
+@bot.command(name='icebreaker') #An icebreaker given the subject of the server
+async def create_channel(ctx):
+    global SERVER_TYPE
+    if SERVER_TYPE == 'STANDARD':
+        await ctx.send(random.choice(icebreaker_questions_STANDARD))
+    if SERVER_TYPE == 'FURRY':
+        await ctx.send(random.choice(icebreaker_questions_FURRY))
+    if SERVER_TYPE == 'ART':
+        await ctx.send(random.choice(icebreaker_questions_ART))
+    if SERVER_TYPE == 'MUSIC':
+        await ctx.send(random.choice(icebreaker_questions_MUSIC))
+    if SERVER_TYPE == 'SCHOOL':
+        await ctx.send(random.choice(icebreaker_questions_SCHOOL))
+
+
+@bot.command(name='man') #School server
+async def create_channel(ctx):
+    embed = discord.Embed(title="HELP", description="This is the HELP or MAN page for SPYRO", color=0x00ff00)
+    embed.add_field(name="/icebreaker",value=f"This allows you to generate an icebreaker that fits the servers theme",inline=False)
+    embed.add_field(name="/whoami",value=f"Whoami shows the type of server that it is classified as",inline=False)
+    embed.add_field(name="ADMIN COMMANDS",value=f"______________________________",inline=False)
+    embed.add_field(name="/server_A",value=f"This creates a basic art server",inline=False)
+    embed.add_field(name="/server_S",value=f"This creates a basic standard server for just chatting with freinds",inline=False)
+    embed.add_field(name="/server_M",value=f"This creates a basic Music server",inline=False)
+    embed.add_field(name="/server_F",value=f"This creates a setup furry server",inline=False)
+    embed.add_field(name="/server_SC",value=f"This creates a basic school server",inline=False)
+    await ctx.author.send(embed=embed)
+
+
+
+# Run the bot
+bot.run("YOUR_OWN_KEY_HERE")
